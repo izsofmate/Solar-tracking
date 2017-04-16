@@ -172,66 +172,32 @@ void calculateDegree(double lat, double lng,
    initSolarCalc(timeZoneOffset,lat,lng);
    setTime(t);
    int alfa=getSAA(t);
-   bool E_D;
-   if(alfa>180){
-    E_D=true;
-   }else{
-    E_D=true;
-   }
-   if(alfa>=0&&alfa<90){
-    //E_D=true;
-   }else {
-    if(alfa>=90&&alfa<=180){
-      //E_D=false;
-      alfa=179-alfa;
-    }else {
-      if(alfa>180&&alfa<=270){
-        //E_D=false;
-        alfa-=181;
-      }else {
-        if(alfa>270&&alfa<=360){
-          //E_D=true;
-          alfa=269-alfa;
-          //alfa-=181;
-        }
-      }
-    }
-   }   
-   double beta_rad=getSEA(t)*M_PI/180.0;
+   int beta=getSEA(t); 
+   double beta_rad=beta*M_PI/180.0;
    double alfa_rad=alfa*M_PI/180.0;
-   degreeED=atan(cos(M_PI/2-beta_rad)/cos(alfa_rad)/cos(beta_rad))*180.0/M_PI;
-   if(E_D)
-    degreeED=180-degreeED;
-
-   //Eddig az Észak-Dél szöget számoltam
-   //*************************************************************************************************
-   //Kelet-Nyugat
-   alfa=getSAA(t);
-   bool K_NY;
-   if(alfa>180){
-    K_NY=true;
+   
+   if(beta==90){
+	   degreeED=SZOGKOZEP;
+	   degreeKNY=SZOGKOZEP;
    }else{
-    K_NY=false;
+   	switch(alfa){
+		case 0:
+			
+			break;
+		case 90:
+			
+			break;
+		case 180:
+			
+			break;
+		case 270: 
+			
+			break;
+		default:
+			
+			break;
+	}
    }
-   if(alfa>0&&alfa<=90){
-    alfa=90-alfa;
-   }else {
-    if(alfa>90&&alfa<=180){
-      alfa-=90;
-    }else {
-      if(alfa>180&&alfa<=270){
-        alfa=270-alfa;
-      }else {
-        if(alfa>270&&alfa<=360){
-          alfa-=270;
-        }
-      }
-    }
-   }
-   alfa_rad=alfa*M_PI/180.0;
-   degreeKNY=atan(cos(M_PI/2-beta_rad)/cos(alfa_rad)/cos(beta_rad))*180.0/M_PI;
-   if(K_NY)
-    degreeKNY=180-degreeKNY;
 }
 
 //********************************************************************************************************
